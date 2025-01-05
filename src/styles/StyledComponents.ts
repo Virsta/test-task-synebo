@@ -71,10 +71,10 @@ export const TodoItem = styled.div<{ isDragging: boolean }>`
   padding: 16px;
   border-bottom: 1px solid #eee;
   cursor: grab;
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease;
-  background: ${({ isDragging }) => (isDragging ? "#ddd" : "white")};
+  transform: ${({ isDragging }) => (isDragging ? 'scale(1.05)' : 'scale(1)')};
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  opacity: ${({ isDragging }) => (isDragging ? 0.5 : 1)};
+  background: ${({ isDragging }) => (isDragging ? "transparent" : "white")};
 
   &:active {
     cursor: grabbing;

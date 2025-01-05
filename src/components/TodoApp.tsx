@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Todo } from '../types/types';
@@ -31,9 +31,10 @@ const TodoApp: React.FC = () => {
   };
 
   const moveTodo = (draggedId: string, targetId: string) => {
-    const draggedIndex = todos.findIndex(todo => todo.id === draggedId);
-    const targetIndex = todos.findIndex(todo => todo.id === targetId);
-    if (draggedIndex !== -1 && targetIndex !== -1) {
+    const draggedIndex = todos.findIndex((todo) => todo.id === draggedId);
+    const targetIndex = todos.findIndex((todo) => todo.id === targetId);
+  
+    if (draggedIndex !== -1 && targetIndex !== -1 && draggedIndex !== targetIndex) {
       const updatedTodos = [...todos];
       const [movedTodo] = updatedTodos.splice(draggedIndex, 1);
       updatedTodos.splice(targetIndex, 0, movedTodo);
@@ -66,7 +67,7 @@ const TodoApp: React.FC = () => {
           <InputWrapper>
             <Input
               value={newTodo}
-              onChange={(e) => setNewTodo(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewTodo(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Create a new todo..."
             />
@@ -77,6 +78,7 @@ const TodoApp: React.FC = () => {
               key={todo.id}
               todo={todo}
               toggleTodo={toggleTodo}
+              todos={todos}
               deleteTodo={deleteTodo}
               moveTodo={moveTodo}
             />
